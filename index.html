@@ -3,11 +3,10 @@
 <title>A professional software engineer</title>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/vue@2.7.16/dist/vue.js"></script>
-
-
 <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
@@ -32,26 +31,106 @@
         </div>
           <div class="col-sm-6">
             <p class="text-center">{{intro}}</p>
+            <template-test></template-test>
+         
           </div>
           <div class="col-sm-4" >
-            <p class="text-center">{{contact}}</p>
+            <p class="text-center" v-on:click="alertshow">{{contact}}</p>
+           <input type="email" v-model="txt">
+
           </div>
         </div>
         <footer>
+          <p class="text-center">{{contactShow}}</p>
             <p class="text-center">&#9989; 2024</p>
         </footer>
       </div>
 
       <script type = "text/javascript">
-        var vue_det = new Vue({
-           el: '#detail',
-           data: {
-            name:'Naziur Rahman',
-            intro: 'Hello, this is a software developer.',
-            contact:'01315785292'
+        const vue_det = Vue.createApp({                 
+           data() {
 
-           }
+            return {
+              name:'Naziur Rahman',
+            intro: 'Hello, this is a software developer.',
+            contact:'01315785292',
+            txt:''
+    }
+          
+           
+
+           },
+           methods:{
+              visitorcount(){
+
+                  oldcount=1;
+
+                  return 'visitor: '+oldcount;
+
+              },
+              alertshow(){
+
+
+                alert('can connect on whatsapp and imo also!');
+              }
+              
+
+
+           },
+           computed: {
+      contactShow() {
+
+        
+
+
+          return this.contact;
+       
+      
+      }
+    },
+    watch: {
+    txt(newVal,oldVal) {
+if(newVal>0){
+
+  console.log('positive no');
+}else{
+
+
+  console.log('not positive no');
+}
+
+
+    }
+  
+  },
+
+
+
+
+
+
+
+
+
         });
+
+
+        vue_det.component('template-test',{
+
+          template:
+          `<h1>this is a header</h1>
+          <p>this is a paragraph</p>
+          `
+
+        });
+
+
+        vue_det.mount("#detail");
+
+
+
+
+
      </script>
 
 </body>
